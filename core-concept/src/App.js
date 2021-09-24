@@ -1,42 +1,72 @@
 // import logo from "./logo.svg";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const allProducts = [
-    { name: "Photoshop", price: "$ 24.00" },
-    { name: "Illustrator", price: "$ 30.00" },
-    { name: "Adobe XD", price: "$ 45.00" },
-    { name: "Adobe EL", price: "$ 45.00" },
+  const allFriends = [
+    { name: "ashik", id: "50", nationality: "Bangladeshi" },
+    { name: "nahid", id: "80", nationality: "England" },
+    { name: "Anis", id: "100", nationality: "America" },
   ];
-  const products = allProducts.map((myProduct) => myProduct);
-  console.log(products);
-
   return (
-    <div className="App">
-       {
-        products.map(pd=> <Product product={pd.name} price={pd.price}></Product>)
-       }
+    <div>
+      {/* Components Gose Here */}
+      <h2>My Friend List</h2>
+      <Counter></Counter>
+      {allFriends.map((myFriends) => (
+        <Friend mf={myFriends}></Friend>
+      ))}
+     
     </div>
   );
 }
-function Product(props) {
-  const productStyle = {
-    border: "1px solid red",
-    backgroundColor: "blue",
-    width: "240px",
-    borderRadius: "5px",
-    color:'white'
+
+function Friend(props) {
+  const friendStyle = {
+    backgroundColor: "gray",
+    border: "1px solid black",
+    marginTop: "5px",
+    width: "300px",
+    marginLeft: "10px",
+    padding: "10px",
+    color: "white",
   };
-  console.log(props);
+  const {name,id,nationality}=props.mf
   return (
-    <div style={productStyle}>
-      <div>
-        <h3>{props.product}</h3>
-        <h5>{props.price}</h5>
-        <button>Buy Now</button>
-      </div>
+    <div style={friendStyle}>
+      <h4>
+        Name : <span>{name}</span>
+      </h4>
+      <h4>
+        Id : <span>{id}</span>
+      </h4>
+      <h4>
+        Nationality : <span>{nationality}</span>
+      </h4>
     </div>
   );
+}
+
+
+function Counter(){
+ const [myCount,setCount] = useState(0)
+
+ const increaseValue=()=>{
+   const newValue=myCount+1
+   setCount(newValue)
+ }
+ const decreaseValue=()=>{
+   const newValue=myCount-1
+   setCount(newValue)
+ }
+
+  return(
+    <div>
+      <h1>Count : {myCount}</h1>
+      <button onClick={increaseValue}>+++</button>
+      <button onClick={decreaseValue}>---</button>
+    </div>
+  )
 }
 
 export default App;
